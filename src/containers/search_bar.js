@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+
+
 class SearchBar extends Component {
 
   constructor(props) {
@@ -34,6 +36,7 @@ class SearchBar extends Component {
     // don't submit form, bc html form default is to submit
     event.preventDefault()
     // we need to go and fetch weather data
+
   }
 
   render() {
