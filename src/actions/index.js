@@ -8,6 +8,8 @@ const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?`
 // whereas wrong string name will just run but action won't hit appropriate reducer
 export const FETCH_WEATHER = 'FETCH_WEATHER'
 
+// this function fetches the weather object for a particular city that the user searched for
+// upon pressing submit, it fetches the data and sends the action to the reducers
 export function fetchWeather(city) {
   // final request url
   const url = `${ROOT_URL}q=${city},us&appid=${API_KEY}`

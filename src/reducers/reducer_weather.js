@@ -11,9 +11,11 @@ export default function(state=INITIAL_STATE, action) {
   switch(action.type) {
     case FETCH_WEATHER:
       // resolved promise has data in promise.data field
+      // fetchWeather action sends newest searched city data to this reducer, and it gets piled
+      // on top of the state.weather array
       return [ action.payload.data, ...state ]
 
     default:
-      return
+      return state
   }
 }
