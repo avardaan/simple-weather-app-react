@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchWeather } from '../actions'
 
 
 class SearchBar extends Component {
@@ -17,6 +19,7 @@ class SearchBar extends Component {
     // so we completely redefine the old onInputChange with the new onInputChange which is bound to this current component
     // all done using the old function itself, and its bind method!
     this.onInputChange = this.onInputChange.bind(this)
+    this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
   onInputChange(event) {
@@ -32,10 +35,13 @@ class SearchBar extends Component {
     this.setState({ term: event.target.value })
   }
 
-  onFormSubmit() {
+  onFormSubmit(event) {
     // don't submit form, bc html form default is to submit
     event.preventDefault()
     // we need to go and fetch weather data
+    this.props.fetchWeather(this.state.term)
+    // clear search bar
+    this.setState({ term: '' })
 
   }
 
@@ -55,7 +61,15 @@ class SearchBar extends Component {
     )
 
   }
-
 }
 
-export default SearchBar
+
+function mapDispatchToProps(dispatch) {
+  // makes sure that fetchWeather is passed to props as fetchWeather and also goes through all reducers
+  return bindActionCreators({
+    fetchWeather: fetchWeather
+  }, dispatch)
+}
+
+
+export default connect(null, mapDispatchToProps)(SearchBar)
